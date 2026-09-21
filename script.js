@@ -41,6 +41,7 @@ const tulips = document.querySelectorAll(".tulip");
 const number = document.querySelector("#letter-number");
 const title = document.querySelector("#letter-title");
 const message = document.querySelector("#letter-message");
+const signature = document.querySelector(".signature");
 
 function selectFlower(index) {
   const letter = letters[index];
@@ -54,6 +55,7 @@ function selectFlower(index) {
   number.textContent = letter.number;
   title.textContent = letter.title;
   message.textContent = letter.message;
+  signature.innerHTML = "Con Cariño,<br />Manuel Olin";
 }
 
 tulips.forEach((tulip) => {

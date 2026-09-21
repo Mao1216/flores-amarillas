@@ -57,6 +57,15 @@ button {
   text-transform: uppercase;
 }
 
+.title-block strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #265f43;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1;
+}
+
 .title-block h1 {
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
