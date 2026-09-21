@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girasoles para ti 🌻</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0a0e29, #1a2352);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 10vh;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #ffeb3b;
+            text-shadow: 0 0 15px rgba(255, 235, 59, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 2s ease 2s forwards;
+            padding: 0 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 2s ease 3s forwards;
+            padding: 0 20px;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        .instruction {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #ffeb3b;
+            font-weight: 600;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            opacity: 0;
+            animation: fadeUp 1s ease 6s forwards, pulse 2s infinite 7s;
+            border: 1px solid rgba(255,235,59,0.3);
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,235,59,0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 10px 5px rgba(255,235,59,0.1); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,235,59,0); }
+        }
+
+        .bouquet {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .sunflower-wrapper {
+            position: absolute;
+            bottom: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: bottom center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Efecto al pasar el mouse por las flores para indicar que son clickeables */
+        .sunflower-wrapper:hover .flower-head {
+            filter: drop-shadow(0 0 20px rgba(255, 235, 59, 0.6)) brightness(1.1);
+        }
+
+        .stem {
+            width: 10px;
+            background: linear-gradient(to right, #1b5e20, #388e3c, #1b5e20);
+            border-radius: 10px 10px 0 0;
+            height: 0;
+            position: relative;
+            box-shadow: inset -2px 0 5px rgba(0,0,0,0.4);
+            animation: growStem 3s ease-out forwards;
+        }
+
+        @keyframes growStem {
+            to { height: var(--h); }
+        }
+
+        .flower-head {
+            position: absolute;
+            top: 0;
+            transform: scale(0);
+            animation: bloom 2s ease-out 2.5s forwards;
+            z-index: 10;
+            transition: filter 0.3s ease;
+        }
+
+        @keyframes bloom {
+            to { transform: scale(1); }
+        }
+
+        .center {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #4e342e 20%, #3e2723 60%, #1c0d0a 100%);
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
+            background-image: 
+                radial-gradient(#2a1711 15%, transparent 16%),
+                radial-gradient(#2a1711 15%, transparent 16%);
+            background-size: 8px 8px;
+            background-position: 0 0, 4px 4px;
+        }
+
+        .petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 110px;
+            background: linear-gradient(to bottom, #ffee58, #fbc02d, #f57f17);
+            border-radius: 50% 50% 20% 20%;
+            transform-origin: 50% 100%;
+            margin-top: -110px; 
+            margin-left: -15px; 
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 235, 59, 0.2);
+            border: 1px solid rgba(245, 127, 23, 0.3);
+        }
+
+        .leaf {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background: linear-gradient(to bottom right, #388e3c, #1b5e20);
+            border-radius: 0 50% 0 50%;
+            opacity: 0;
+            animation: bloom 1.5s ease-out 3s forwards;
+            box-shadow: inset 2px 2px 5px rgba(255,255,255,0.2);
+        }
+
+        .leaf.left { left: -45px; bottom: 40%; transform-origin: right bottom; transform: scale(0) rotate(-30deg); }
+        .leaf.right { right: -45px; bottom: 60%; border-radius: 50% 0 50% 0; transform-origin: left bottom; transform: scale(0) rotate(30deg); }
+
+        .sf-1 { left: 50%; transform: translateX(-50%); z-index: 5; }
+        .sf-2 { left: 50%; transform: translateX(-50%) rotate(-15deg); z-index: 4; }
+        .sf-3 { left: 50%; transform: translateX(-50%) rotate(-30deg); z-index: 3; }
+        .sf-4 { left: 50%; transform: translateX(-50%) rotate(15deg); z-index: 4; }
+        .sf-5 { left: 50%; transform: translateX(-50%) rotate(30deg); z-index: 3; }
+
+        /* Balanceo suave de las flores */
+        .sway-1 { animation: sway 6s ease-in-out infinite alternate; }
+        .sway-2 { animation: sway 7s ease-in-out infinite alternate-reverse; }
+        .sway-3 { animation: sway 5s ease-in-out infinite alternate; }
+
+        @keyframes sway {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
+        }
+
+        .ribbon-container {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            animation: fadeUp 2s ease 4s forwards;
+            opacity: 0;
+        }
+
+        .ribbon-center {
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(to right, #b71c1c, #e53935, #b71c1c);
+            border-radius: 5px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .ribbon-bow {
+            position: absolute;
+            top: -15px;
+            width: 40px;
+            height: 40px;
+            background: #d32f2f;
+            border-radius: 50% 50% 0 50%;
+            z-index: 2;
+            box-shadow: inset -3px -3px 5px rgba(0,0,0,0.3);
+        }
+        .ribbon-bow.left { left: -30px; transform: rotate(-45deg); }
+        .ribbon-bow.right { right: -30px; border-radius: 50% 50% 50% 0; transform: rotate(45deg); }
+
+        .ribbon-tail {
+            position: absolute;
+            top: 15px;
+            width: 20px;
+            height: 60px;
+            background: linear-gradient(to bottom, #c62828, #e53935);
+            z-index: 1;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .ribbon-tail.left { left: -5px; transform: rotate(15deg); border-radius: 0 0 0 10px; }
+        .ribbon-tail.right { right: -5px; transform: rotate(-15deg); border-radius: 0 0 10px 0; }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 10, 30, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .vintage-letter {
+            position: relative;
+            width: 85%;
+            max-width: 400px;
+            min-height: 250px;
+            background-color: #fdf5e6; /* Color papel viejo */
+            /* Textura de papel */
+            background-image: 
+                linear-gradient(to right, rgba(139,69,19,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(139,69,19,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-radius: 3px 15px 5px 20px; /* Bordes irregulares */
+            padding: 40px 30px;
+            box-shadow: 
+                5px 5px 20px rgba(0,0,0,0.5),
+                inset 0 0 30px rgba(139,69,19,0.15),
+                inset 0 0 5px rgba(139,69,19,0.3);
+            border: 1px solid rgba(205, 133, 63, 0.5);
+            
+            transform: scale(0.8) translateY(30px) rotate(-2deg);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .modal-overlay.active .vintage-letter {
+            transform: scale(1) translateY(0) rotate(0deg);
+        }
+
+        .letter-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #4a2e15;
+            line-height: 1.4;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #8b4513;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Luciérnagas */
+        .firefly {
+            position: absolute; width: 4px; height: 4px;
+            background: #fff; border-radius: 50%;
+            box-shadow: 0 0 10px 2px #ffeb3b; opacity: 0; z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .title { font-size: 2.8rem; }
+            .bouquet { transform: scale(0.75); transform-origin: bottom center; }
+            .letter-text { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-overlay">
+        <!-- EDIT YOUR MESSAGE HERE / EDITA TU MENSAJE AQUÍ -->
+        <h1 class="title">Para mi hermosa novia</h1>
+        <p class="subtitle">Sé que te encantan, así que te hice este ramo especial. 💛</p>
+        <div class="instruction">👆 Toca cada girasol para leer un mensaje 👆</div>
+    </div>
+
+    <div class="bouquet">
+        
+        <!-- Flor 3 (Izquierda Extrema) -->
+        <div class="sunflower-wrapper sf-3" data-index="0">
+            <div class="stem sway-1" style="--h: 40vh;">
+                <div class="leaf left"></div>
+            </div>
+            <div class="flower-head sway-1" style="margin-top: -40vh;">
+                <div class="center"></div>
+            </div>
+        </div>
+
+        <!-- Flor 5 (Derecha Extrema) -->
+        <div class="sunflower-wrapper sf-5" data-index="1">
+            <div class="stem sway-2" style="--h: 38vh;">
+                <div class="leaf right"></div>
+            </div>
+            <div class="flower-head sway-2" style="margin-top: -38vh;">
+                <div class="center"></div>
+            </div>
+        </div>
+
+        <!-- Flor 2 (Centro Izquierda) -->
+        <div class="sunflower-wrapper sf-2" data-index="2">
+            <div class="stem sway-2" style="--h: 55vh;">
+                <div class="leaf left"></div>
+            </div>
+            <div class="flower-head sway-2" style="margin-top: -55vh;">
+                <div class="center"></div>
+            </div>
+        </div>
+
+        <!-- Flor 4 (Centro Derecha) -->
+        <div class="sunflower-wrapper sf-4" data-index="3">
+            <div class="stem sway-3" style="--h: 52vh;">
+                <div class="leaf right"></div>
+            </div>
+            <div class="flower-head sway-3" style="margin-top: -52vh;">
+                <div class="center"></div>
+            </div>
+        </div>
+
+        <!-- Flor 1 (Centro Frontal - La más alta) -->
+        <div class="sunflower-wrapper sf-1" data-index="4">
+            <div class="stem sway-1" style="--h: 65vh;">
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+            <div class="flower-head sway-1" style="margin-top: -65vh;">
+                <div class="center"></div>
+            </div>
+        </div>
+
+        <!-- El lazo que ata el ramo -->
+        <div class="ribbon-container">
+            <div class="ribbon-bow left"></div>
+            <div class="ribbon-bow right"></div>
+            <div class="ribbon-tail left"></div>
+            <div class="ribbon-tail right"></div>
+            <div class="ribbon-center"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="letter-modal">
+        <div class="vintage-letter">
+            <button class="close-btn" id="close-modal">X</button>
+            <p class="letter-text" id="letter-content"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            const flowerHeads = document.querySelectorAll('.flower-head');
+            const numPetals = 24; 
+
+            flowerHeads.forEach(head => {
+                const center = head.querySelector('.center');
+                
+                // 2 capas de pétalos para que se vea frondoso
+                for (let layer = 0; layer < 2; layer++) {
+                    const petalsInLayer = layer === 0 ? numPetals : numPetals - 6;
+                    const scale = layer === 0 ? 1 : 0.85; 
+                    
+                    for (let i = 0; i < petalsInLayer; i++) {
+                        const petal = document.createElement('div');
+                        petal.className = 'petal';
+                        
+                        const angle = (360 / petalsInLayer) * i;
+                        const offset = layer === 1 ? (360 / petalsInLayer) / 2 : 0;
+                        
+                        petal.style.transform = `rotate(${angle + offset}deg) scale(${scale})`;
+                        head.insertBefore(petal, center);
+                    }
+                }
+            });
+
+            const body = document.querySelector('body');
+            const numFireflies = 35;
+
+            for (let i = 0; i < numFireflies; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'firefly';
+                
+                const left = Math.random() * 100;
+                const animDuration = 5 + Math.random() * 10;
+                const animDelay = Math.random() * 5;
+                
+                firefly.style.left = `${left}vw`;
+                firefly.style.bottom = `-10px`;
+                firefly.style.animation = `float ${animDuration}s linear ${animDelay}s infinite`;
+                
+                body.appendChild(firefly);
+            }
+
+            
+            // 📝 AQUÍ PUEDES EDITAR LOS 5 MENSAJES DE LAS FLORES
+            const mensajes = [
+                "Gracias por ser mi lugar seguro y mi paz. 🏡", // Flor Izquierda Extrema
+                "Cada día que paso contigo, te amo un poquito más. ❤️", // Flor Derecha Extrema
+                "Eres el sol que ilumina todos mis días grises. ☀️", // Flor Centro Izquierda
+                "Tu sonrisa es, por mucho, mi paisaje favorito en este mundo. 💫", // Flor Centro Derecha
+                "Eres la coincidencia más hermosa que me pudo pasar. Te amo infinitamente. 🌻" // Flor Principal (Centro)
+            ];
+
+            const modal = document.getElementById('letter-modal');
+            const letterContent = document.getElementById('letter-content');
+            const closeModal = document.getElementById('close-modal');
+            const girasoles = document.querySelectorAll('.sunflower-wrapper');
+
+            // Abrir carta al tocar flor
+            girasoles.forEach(girasol => {
+                girasol.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    letterContent.textContent = mensajes[index];
+                    modal.classList.add('active');
+                });
+            });
+
+            // Cerrar carta al tocar la 'X'
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            // Cerrar carta al tocar fuera de ella
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
