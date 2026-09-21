@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ramo de tulipanes amarillos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="scene" aria-label="Ramo interactivo de tulipanes amarillos">
+      <section class="bouquet-panel">
+        <div class="title-block">
+          <p>Para ti</p>
+          <h1>Flores amarillas</h1>
+        </div>
+
+        <div class="bouquet" aria-label="Selecciona un tulipán para leer su carta">
+          <div class="wrap wrap-left"></div>
+          <div class="wrap wrap-right"></div>
+          <div class="ribbon"></div>
+
+          <button class="tulip tulip-1 is-active" type="button" data-flower="0" aria-label="Tulipán de la alegría" aria-pressed="true">
+            <span class="stem"></span>
+            <span class="leaf leaf-a"></span>
+            <span class="leaf leaf-b"></span>
+            <span class="bloom">
+              <span class="petal petal-left"></span>
+              <span class="petal petal-center"></span>
+              <span class="petal petal-right"></span>
+            </span>
+          </button>
+
+          <button class="tulip tulip-2" type="button" data-flower="1" aria-label="Tulipán de la calma" aria-pressed="false">
+            <span class="stem"></span>
+            <span class="leaf leaf-a"></span>
+            <span class="leaf leaf-b"></span>
+            <span class="bloom">
+              <span class="petal petal-left"></span>
+              <span class="petal petal-center"></span>
+              <span class="petal petal-right"></span>
+            </span>
+          </button>
+
+          <button class="tulip tulip-3" type="button" data-flower="2" aria-label="Tulipán de la esperanza" aria-pressed="false">
+            <span class="stem"></span>
+            <span class="leaf leaf-a"></span>
+            <span class="leaf leaf-b"></span>
+            <span class="bloom">
+              <span class="petal petal-left"></span>
+              <span class="petal petal-center"></span>
+              <span class="petal petal-right"></span>
+            </span>
+          </button>
+
+          <button class="tulip tulip-4" type="button" data-flower="3" aria-label="Tulipán de la ternura" aria-pressed="false">
+            <span class="stem"></span>
+            <span class="leaf leaf-a"></span>
+            <span class="leaf leaf-b"></span>
+            <span class="bloom">
+              <span class="petal petal-left"></span>
+              <span class="petal petal-center"></span>
+              <span class="petal petal-right"></span>
+            </span>
+          </button>
+
+          <button class="tulip tulip-5" type="button" data-flower="4" aria-label="Tulipán de la luz" aria-pressed="false">
+            <span class="stem"></span>
+            <span class="leaf leaf-a"></span>
+            <span class="leaf leaf-b"></span>
+            <span class="bloom">
+              <span class="petal petal-left"></span>
+              <span class="petal petal-center"></span>
+              <span class="petal petal-right"></span>
+            </span>
+          </button>
+
+          <button class="tulip tulip-6" type="button" data-flower="5" aria-label="Tulipán del cariño" aria-pressed="false">
+            <span class="stem"></span>
+            <span class="leaf leaf-a"></span>
+            <span class="leaf leaf-b"></span>
+            <span class="bloom">
+              <span class="petal petal-left"></span>
+              <span class="petal petal-center"></span>
+              <span class="petal petal-right"></span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <aside class="letter" aria-live="polite">
+        <div class="letter-top">
+          <span id="letter-number">Carta I</span>
+          <span>Septiembre</span>
+        </div>
+        <h2 id="letter-title">Alegría que florece</h2>
+        <p id="letter-message">
+          Eres ese rayito de sol que llega sin pedir permiso y cambia todo el cuarto. Ojalá hoy recuerdes lo mucho
+          que iluminas, incluso cuando no te das cuenta.
+        </p>
+        <p class="signature">Con cariño</p>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

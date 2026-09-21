@@ -1,0 +1,375 @@
+:root {
+  --sky: #98c5d9;
+  --deep-green: #1d5a3d;
+  --leaf: #2c7a4b;
+  --leaf-light: #64a96a;
+  --yellow: #ffd84f;
+  --yellow-deep: #f0ad1e;
+  --paper: #f3e1b8;
+  --paper-edge: #bd8f57;
+  --ink: #4c2f22;
+  --ribbon: #d4544c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 244, 172, 0.75), transparent 22rem),
+    linear-gradient(145deg, #f7d26a 0%, #98c5d9 42%, #4f9074 100%);
+}
+
+button {
+  font: inherit;
+}
+
+.scene {
+  display: grid;
+  grid-template-columns: minmax(18rem, 1.05fr) minmax(17rem, 0.95fr);
+  gap: clamp(1.25rem, 4vw, 4rem);
+  align-items: center;
+  width: min(1120px, calc(100% - 2rem));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 5rem) 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+.bouquet-panel {
+  min-width: 0;
+}
+
+.title-block {
+  margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+  color: #173d31;
+}
+
+.title-block p {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title-block h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.bouquet {
+  position: relative;
+  height: min(68vh, 39rem);
+  min-height: 31rem;
+  overflow: visible;
+}
+
+.tulip {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  width: 6.25rem;
+  height: 30rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: 50% 92%;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.tulip:hover,
+.tulip:focus-visible,
+.tulip.is-active {
+  filter: drop-shadow(0 1rem 1.1rem rgba(78, 67, 22, 0.28));
+}
+
+.tulip:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 0.35rem;
+  border-radius: 999px;
+}
+
+.tulip.is-active {
+  transform: translateX(-50%) rotate(var(--tilt)) translateY(-1.1rem) scale(1.05);
+}
+
+.tulip-1 {
+  --tilt: -17deg;
+  transform: translateX(-50%) rotate(var(--tilt));
+  z-index: 4;
+}
+
+.tulip-2 {
+  --tilt: 14deg;
+  transform: translateX(-50%) rotate(var(--tilt));
+  z-index: 5;
+}
+
+.tulip-3 {
+  --tilt: 0deg;
+  transform: translateX(-50%) rotate(var(--tilt));
+  z-index: 6;
+}
+
+.tulip-4 {
+  --tilt: -31deg;
+  transform: translateX(-50%) rotate(var(--tilt));
+  z-index: 3;
+}
+
+.tulip-5 {
+  --tilt: 29deg;
+  transform: translateX(-50%) rotate(var(--tilt));
+  z-index: 2;
+}
+
+.tulip-6 {
+  --tilt: 6deg;
+  transform: translateX(-50%) rotate(var(--tilt)) translateY(1.2rem);
+  z-index: 7;
+}
+
+.stem {
+  position: absolute;
+  left: calc(50% - 0.25rem);
+  bottom: 1rem;
+  width: 0.5rem;
+  height: 23.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #155b34, #55a45c 48%, #1d663e);
+}
+
+.leaf {
+  position: absolute;
+  bottom: 7rem;
+  width: 4.8rem;
+  height: 9rem;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, var(--leaf-light), var(--leaf));
+  transform-origin: 50% 100%;
+}
+
+.leaf-a {
+  left: 0.75rem;
+  transform: rotate(-38deg);
+}
+
+.leaf-b {
+  right: 0.65rem;
+  bottom: 10rem;
+  transform: scaleX(-1) rotate(-34deg);
+}
+
+.bloom {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  width: 6.2rem;
+  height: 7rem;
+  transform: translateX(-50%);
+}
+
+.petal {
+  position: absolute;
+  bottom: 0;
+  width: 3.9rem;
+  height: 6.3rem;
+  background: linear-gradient(145deg, #fff36f 6%, var(--yellow) 45%, var(--yellow-deep) 100%);
+  box-shadow: inset -0.35rem -0.75rem 0 rgba(190, 118, 8, 0.13);
+}
+
+.petal-center {
+  left: 50%;
+  width: 4.3rem;
+  height: 6.8rem;
+  border-radius: 70% 70% 48% 48%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.petal-left {
+  left: 0.2rem;
+  border-radius: 82% 42% 54% 44%;
+  transform: rotate(-18deg);
+  z-index: 2;
+}
+
+.petal-right {
+  right: 0.2rem;
+  border-radius: 42% 82% 44% 54%;
+  transform: rotate(18deg);
+  z-index: 2;
+}
+
+.wrap-left,
+.wrap-right {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 13rem;
+  height: 14rem;
+  border-radius: 0 0 2rem 2rem;
+  background: linear-gradient(145deg, rgba(232, 189, 99, 0.74), rgba(150, 88, 46, 0.75));
+  transform-origin: 50% 100%;
+  z-index: 8;
+}
+
+.wrap-left {
+  transform: translateX(-91%) skewY(12deg) rotate(9deg);
+}
+
+.wrap-right {
+  transform: translateX(-9%) skewY(-12deg) rotate(-9deg);
+}
+
+.ribbon {
+  position: absolute;
+  left: 50%;
+  bottom: 9.3rem;
+  width: 8.5rem;
+  height: 2.3rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a42f34, var(--ribbon), #ef7d68);
+  box-shadow: 0 0.75rem 1.4rem rgba(77, 31, 18, 0.25);
+  transform: translateX(-50%);
+  z-index: 9;
+}
+
+.letter {
+  position: relative;
+  min-height: 24rem;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border: 1px solid rgba(122, 74, 35, 0.34);
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(96, 57, 27, 0.08), transparent 16%, transparent 84%, rgba(96, 57, 27, 0.08)),
+    radial-gradient(circle at 35% 26%, rgba(255, 255, 255, 0.34), transparent 9rem),
+    var(--paper);
+  box-shadow: 0 1.4rem 2.6rem rgba(51, 50, 33, 0.25);
+}
+
+.letter::before,
+.letter::after {
+  position: absolute;
+  content: "";
+  inset: 0.7rem;
+  border: 1px solid rgba(139, 85, 44, 0.28);
+  pointer-events: none;
+}
+
+.letter::after {
+  inset: auto 2.5rem 1.6rem auto;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(164, 47, 52, 0.78);
+  box-shadow: inset 0 0 0 0.55rem rgba(125, 32, 36, 0.2);
+}
+
+.letter-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.letter h2 {
+  margin: 0 0 1rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.letter p {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.35;
+}
+
+.letter .signature {
+  margin-top: 2.3rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+@media (max-width: 820px) {
+  .scene {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .bouquet {
+    height: 34rem;
+    min-height: 34rem;
+  }
+
+  .letter {
+    min-height: 20rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .scene {
+    width: min(100% - 1rem, 1120px);
+    padding-top: 1rem;
+  }
+
+  .title-block h1 {
+    font-size: clamp(2.9rem, 17vw, 4.4rem);
+  }
+
+  .bouquet {
+    height: 30rem;
+    min-height: 30rem;
+  }
+
+  .tulip {
+    height: 27rem;
+    width: 5.45rem;
+  }
+
+  .stem {
+    height: 20.5rem;
+  }
+
+  .bloom {
+    width: 5.35rem;
+    height: 6.1rem;
+  }
+
+  .petal {
+    width: 3.25rem;
+    height: 5.5rem;
+  }
+
+  .petal-center {
+    width: 3.65rem;
+    height: 5.95rem;
+  }
+
+  .wrap-left,
+  .wrap-right {
+    width: 10.5rem;
+    height: 12.5rem;
+  }
+
+  .ribbon {
+    bottom: 8.5rem;
+  }
+}
